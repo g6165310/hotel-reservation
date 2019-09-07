@@ -180,7 +180,6 @@ export default {
   methods: {
     ...mapActions(["getAllRooms"]),
     updateLoading() {
-      console.log("updateLoading");
       store.commit("setLoading", !store.state.isLoading);
     }
   },

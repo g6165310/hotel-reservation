@@ -100,10 +100,6 @@ export default {
         return item === date;
       });
     }
-  },
-  computed: {},
-  created() {
-    console.log(moment().format("YYYY-MM-DD"));
   }
 };
 </script>
