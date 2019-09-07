@@ -1,0 +1,30 @@
+<template>
+  <div
+    class="bg"
+    :style="{
+      backgroundImage: hovering.hasOwnProperty('room')
+        ? `url(${hovering.room.imageUrl})`
+        : `url(${defaultBg})`
+    }"
+  ></div>
+</template>
+<script>
+export default {
+  name: "Background",
+  data() {
+    return {
+      defaultBg:
+        "https://images.unsplash.com/photo-1519449556851-5720b33024e7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80"
+    };
+  },
+  props: ["hovering"]
+};
+</script>
+<style lang="scss" scoped>
+.bg {
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+}
+</style>
