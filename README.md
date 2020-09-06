@@ -4,7 +4,7 @@
 
 ## DEMO
 
-[Demo](https://g6165310.github.io/90sGame/)
+[Demo](https://g6165310.github.io/hotel-reservation/)
 
 ## API 說明
 
