@@ -11,16 +11,19 @@
         <div class="input-container">
           <label for="name">姓名</label>
           <input type="text" id="name" v-model="name" />
-          <small class="danger-info" v-if="validator.name.unverified">{{
+          <small class="danger-info" v-if="validator.name.unverified">
+            {{
             "* " + validator.name.msg
-          }}</small>
+            }}
+          </small>
         </div>
         <div class="input-container">
           <label for="phone">電話</label>
           <input type="tel" id="phone" v-model="phone" />
-          <small class="danger-info" v-if="validator.phone.unverified">
-            {{ "* " + validator.phone.msg }}
-          </small>
+          <small
+            class="danger-info"
+            v-if="validator.phone.unverified"
+          >{{ "* " + validator.phone.msg }}</small>
         </div>
         <div class="input-container">
           <label>預約起迄</label>
@@ -36,6 +39,7 @@
           />
           <span>~</span>
           <DatePicker
+            class="fixRight"
             format="yyyy/M/dd"
             :disabled="startDate == null"
             v-model="endDate"
@@ -45,9 +49,10 @@
               dates: bookDate
             }"
           />
-          <small class="danger-info" v-if="validator.date.unverified">
-            {{ "* " + validator.date.msg }}
-          </small>
+          <small
+            class="danger-info"
+            v-if="validator.date.unverified"
+          >{{ "* " + validator.date.msg }}</small>
         </div>
       </div>
       <div class="price-detail" :class="{ hide: !endDate }">
@@ -144,13 +149,30 @@ export default {
       if (this.startDate && this.endDate) {
         const diff =
           moment(this.endDate).diff(moment(this.startDate), "days") + 1;
-        const holiday =
-          diff % 7 === 6
-            ? Math.floor(diff / 7) * 2 + 1
-            : Math.floor(diff / 7) * 2;
+        let holidays = 0;
+        for (let i = 0; i < this.rangeOfDate.length; i++) {
+          let date = this.rangeOfDate[i];
+          if (i === this.rangeOfDate.length - 1) {
+            console.log(date);
+            if (
+              moment(date).day() == 0 ||
+              moment(date).day() == 5 ||
+              moment(date).day() == 6
+            ) {
+              break;
+            }
+          }
+          if (
+            moment(date).day() == 0 ||
+            moment(date).day() == 5 ||
+            moment(date).day() == 6
+          ) {
+            holidays++;
+          }
+        }
         return {
-          normal: diff - holiday,
-          holiday: holiday
+          normal: diff - holidays - 1,
+          holiday: holidays
         };
       } else {
         return { normal: 0, holiday: 0 };
@@ -297,6 +319,7 @@ export default {
   }
 }
 .input-container {
+  position: relative;
   margin-bottom: 15px;
   label {
     @include font(14, 1.4, null, 500);
@@ -341,6 +364,10 @@ export default {
     @include font(12, 1.3, null);
     padding-left: 10px;
   }
+}
+.fixRight::v-deep .vdp-datepicker__calendar {
+  right: 0;
+  transform: translateX(0px);
 }
 .price-detail {
   @include clearfix;
@@ -408,6 +435,7 @@ export default {
   }
 }
 small {
+  display: block;
   @include font(12, null, null, 500, #ff5c5c);
   margin-left: 95px;
 }
@@ -415,5 +443,56 @@ small {
   @include font(14, 1.5, 20, 500);
   display: block;
   margin: 20px 0;
+}
+@media (max-width: 414px) {
+  .modal {
+    &-body {
+      width: 90%;
+      padding: 15px 20px;
+    }
+  }
+  .price-detail {
+    &-day {
+      &:before,
+      &::after {
+        width: 20px;
+      }
+      &:before {
+        left: -20px;
+      }
+      &:after {
+        right: -20px;
+      }
+    }
+  }
+  .input-container {
+    input {
+      width: 70%;
+    }
+    label {
+      margin-right: 32px;
+    }
+    &:last-child {
+      label {
+        margin-right: 1px;
+      }
+      > span {
+        margin: 0 3px;
+      }
+    }
+  }
+  .vdp-datepicker {
+    &::v-deep input {
+      width: 80px;
+      @include font(12, 1.3, null);
+      padding-left: 10px;
+    }
+    &::v-deep .vdp-datepicker__calendar {
+      width: 200px;
+    }
+  }
+  small {
+    margin-left: 64px;
+  }
 }
 </style>

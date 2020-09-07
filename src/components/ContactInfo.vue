@@ -10,14 +10,15 @@
     </div>
     <div class="contact-list">
       <ul>
-        <li><img src="../assets/phone-alt-solid.svg" alt />02-17264937</li>
         <li>
-          <img
-            src="../assets/envelope-solid.svg"
-            alt
-          />whitespace@whitespace.com.tw
+          <img src="../assets/phone-alt-solid.svg" alt />02-17264937
         </li>
-        <li><img src="../assets/home-solid.svg" alt />台北羅斯福路十段30號</li>
+        <li>
+          <img src="../assets/envelope-solid.svg" alt />whitespace@whitespace.com.tw
+        </li>
+        <li>
+          <img src="../assets/home-solid.svg" alt />台北羅斯福路十段30號
+        </li>
       </ul>
     </div>
   </div>
@@ -65,6 +66,22 @@ export default {
     height: 20px;
     margin-right: 12px;
     vertical-align: text-bottom;
+  }
+}
+//RWD
+@media (max-width: 767px) {
+  .contactInfo {
+    bottom: 25px;
+  }
+  .social {
+    margin-bottom: 25px;
+  }
+}
+@media (max-width: 414px) {
+  .contactInfo {
+    bottom: 0px;
+    right: 0;
+    left: 0;
   }
 }
 </style>

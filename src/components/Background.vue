@@ -22,9 +22,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .bg {
-  width: 100%;
-  height: 100%;
-  background-position: center;
-  background-size: cover;
+  position: absolute;
+  max-width: 1200px;
+  z-index: -1;
 }
 </style>

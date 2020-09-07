@@ -1,14 +1,8 @@
 <template>
   <div class="navbar" :class="{ active: !isLoading }">
     <ul>
-      <li
-        v-for="(room, index) in rooms"
-        @mouseover="setHover(room, index)"
-        :key="room.id"
-      >
-        <router-link :to="{ name: 'room', params: { id: room.id } }">
-          {{ room.name }}
-        </router-link>
+      <li v-for="(room, index) in rooms" @mouseover="setHover(room, index)" :key="room.id">
+        <router-link :to="{ name: 'room', params: { id: room.id } }">{{ room.name }}</router-link>
       </li>
     </ul>
   </div>
@@ -33,12 +27,11 @@ export default {
   display: none;
 }
 .navbar {
-  width: 305px;
-  height: 405px;
-  background-color: #fff;
   position: absolute;
   right: 0;
   top: 50px;
+  width: 305px;
+  background-color: #fff;
   padding: 34px 37px;
   text-align: left;
   transform: translateX(100%);
@@ -82,6 +75,25 @@ export default {
   }
   &.active {
     transform: translateX(0);
+  }
+}
+@media (max-width: 767px) {
+  .navbar {
+    top: 175px;
+    padding: 25px 27px;
+  }
+}
+@media (max-width: 414px) {
+  .navbar {
+    top: 140px;
+    padding: 17px 18px;
+    &:after {
+      height: 10px;
+      bottom: -10px;
+    }
+    a {
+      padding: 9px 0px;
+    }
   }
 }
 </style>

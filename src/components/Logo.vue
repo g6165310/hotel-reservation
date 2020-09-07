@@ -13,7 +13,6 @@ export default {
 .logo,
 .smallLogo {
   position: absolute;
-  z-index: 10;
   top: 47px;
   left: 54px;
   @include textHide;
@@ -22,11 +21,27 @@ export default {
   background: url("../assets/logo_white.svg");
   width: 162px;
   height: 162px;
+  background-size: cover;
 }
 .smallLogo {
   width: 164px;
   height: 53px;
   background: url("../assets/logo_block.svg");
   background-repeat: no-repeat;
+}
+@media (max-width: 767px) {
+  .logo {
+    width: 121.5px;
+    height: 121.5px;
+    right: 0;
+    left: 0;
+    margin: auto;
+  }
+}
+@media (max-width: 414px) {
+  .logo {
+    width: 81px;
+    height: 81px;
+  }
 }
 </style>

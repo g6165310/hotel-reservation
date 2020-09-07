@@ -1,14 +1,21 @@
 <template>
-  <div class="home">
+  <div
+    class="home"
+    :style="{
+      backgroundImage: hovering.hasOwnProperty('room')
+        ? `url(${hovering.room.imageUrl})`
+        : `url(${defaultBg})`
+    }"
+  >
     <!-- <img alt="Vue logo" src="../assets/logo.png" /> -->
     <Background :hovering="hovering" />
     <Logo />
-    <ContactInfo />
     <Navbar @sendHover="setHovering" :rooms="rooms" :isLoading="isLoading" />
     <div class="hovering-title" v-if="hovering.room">
       <span>{{ `0${hovering.index + 1}` }}</span>
       <h3>{{ hovering.room.name }}</h3>
     </div>
+    <ContactInfo />
   </div>
 </template>
 
@@ -27,6 +34,12 @@ export default {
     ContactInfo,
     Navbar,
     Background
+  },
+  data() {
+    return {
+      defaultBg:
+        "https://images.unsplash.com/photo-1519449556851-5720b33024e7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80"
+    };
   },
   computed: {
     rooms() {
@@ -52,10 +65,12 @@ export default {
 </script>
 <style lang="scss" scoped>
 .home {
-  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
   height: 100vh;
-  overflow: hidden;
   position: relative;
+  background-position: center;
+  background-size: cover;
 }
 .hovering-title {
   position: absolute;
@@ -82,6 +97,22 @@ export default {
   }
   h3 {
     @include font(24, 2.5, 36, null, #fff);
+  }
+}
+@media (max-width: 767px) {
+  header {
+    display: block;
+    margin: 0 auto;
+    padding: 0;
+    margin-top: 47px;
+  }
+  .hovering-title {
+    bottom: 50px;
+  }
+}
+@media (max-width: 414px) {
+  .hovering-title {
+    display: none;
   }
 }
 </style>

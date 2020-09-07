@@ -9,9 +9,9 @@
           <p>
             房客人數限制:
             {{
-              currentRoom.descriptionShort.GuestMin +
-                "~" +
-                currentRoom.descriptionShort.GuestMax
+            currentRoom.descriptionShort.GuestMin +
+            "~" +
+            currentRoom.descriptionShort.GuestMax
             }}人
           </p>
           <p>床型: {{ beds }}</p>
@@ -38,11 +38,7 @@
           </div>
         </div>
         <div class="amenities">
-          <div
-            v-for="item in amenities"
-            :key="item.name"
-            :class="{ notProvide: !item.has }"
-          >
+          <div v-for="item in amenities" :key="item.name" :class="{ notProvide: !item.has }">
             <img :src="require(`@/assets/${item.url}`)" alt />
             <span>{{ item.name }}</span>
           </div>
@@ -62,9 +58,7 @@
       </div>
       <div class="booking">
         <Calendar :booking="booking" />
-        <div class="btn-booking" @click="isModalOpened = !isModalOpened">
-          預約時段
-        </div>
+        <div class="btn-booking" @click="isModalOpened = !isModalOpened">預約時段</div>
       </div>
     </section>
     <Modal
@@ -200,12 +194,13 @@ export default {
   position: relative;
 }
 section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
   padding: 50px 30px;
-  @include clearfix;
 }
 .room-info {
   width: 40%;
-  float: left;
   margin-right: 2%;
   position: relative;
   &-name {
@@ -264,7 +259,6 @@ section {
   }
 }
 .room-price {
-  float: left;
   width: 20%;
   text-align: right;
   margin-top: 15px;
@@ -289,7 +283,6 @@ section {
   }
 }
 .booking {
-  float: left;
   width: 35%;
 }
 .btn-booking {
@@ -316,6 +309,72 @@ section {
       rgba(255, 255, 255, 1) 0px,
       rgba(255, 255, 255, 1) 4px
     );
+  }
+}
+@media (max-width: 768px) {
+  .room-info {
+    width: 100%;
+  }
+  .room-price {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .booking {
+    margin-top: 36px;
+    width: 100%;
+  }
+  .btn-booking {
+    width: auto;
+  }
+}
+@media (max-width: 414px) {
+  .booking {
+    width: 100%;
+  }
+  .room-info {
+    &-name {
+      @include font(20, 1.9, 27, 500);
+      margin-bottom: 15px;
+    }
+    &-content {
+      @include font(14, 1.5, 31);
+      margin-bottom: 20px;
+    }
+    &-desc {
+      @include font(12, 1.3, 20);
+      margin-bottom: 15px;
+    }
+    &-checkTime {
+      width: 100%;
+      margin: 28px 0px 40px 0px;
+      @include clearfix;
+    }
+  }
+  .check-in,
+  .check-out {
+    width: 100%;
+  }
+  .check-in {
+    margin-bottom: 16px;
+  }
+  .amenities {
+    span {
+      display: none;
+    }
+  }
+  .room-price {
+    width: 100%;
+    span {
+      @include font(12, 1.5, #6d7278);
+    }
+    .normalDayPrice {
+      @include font(20, 3.1, 27);
+    }
+    .holidayPrice {
+      @include font(14, 1.7, 27);
+    }
   }
 }
 </style>

@@ -1,23 +1,11 @@
 <template>
   <div class="container">
     <div class="main-pic">
-      <img
-        :src="roomImgs[0]"
-        @click="openLightBox(roomImgs[0], 0)"
-        @load="loaded++"
-      />
+      <img :src="roomImgs[0]" @click="openLightBox(roomImgs[0], 0)" @load="loaded++" />
     </div>
     <div class="sub-pic">
-      <img
-        :src="roomImgs[1]"
-        @click="openLightBox(roomImgs[1], 1)"
-        @load="loaded++"
-      />
-      <img
-        :src="roomImgs[2]"
-        @click="openLightBox(roomImgs[2], 2)"
-        @load="loaded++"
-      />
+      <img :src="roomImgs[1]" @click="openLightBox(roomImgs[1], 1)" @load="loaded++" />
+      <img :src="roomImgs[2]" @click="openLightBox(roomImgs[2], 2)" @load="loaded++" />
     </div>
     <div class="lightbox" v-if="isActive" @click.self="closeLightBox">
       <div class="lightbox-img">
@@ -121,7 +109,7 @@ export default {
   right: 0;
   background-color: rgba(55, 55, 55, 0.8);
   &-img {
-    width: 50%;
+    width: 80%;
     height: 80%;
     position: absolute;
     top: 50%;
@@ -142,11 +130,11 @@ export default {
   }
   &-left-btn {
     background-image: url("../assets/chevron-left-solid.svg");
-    left: 20%;
+    left: 2%;
   }
   &-right-btn {
     background-image: url("../assets/chevron-right-solid.svg");
-    right: 20%;
+    right: 2%;
   }
   .btn {
     background-repeat: no-repeat;
@@ -154,8 +142,42 @@ export default {
     height: 50px;
     position: absolute;
     top: 50%;
-    transform: translateX(-50%);
     cursor: pointer;
+  }
+}
+@media (max-width: 767px) {
+  .container {
+    height: 300px;
+  }
+  .main-pic {
+  }
+  .lightbox {
+    &-img {
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+    &-num {
+    }
+    &-left-btn {
+    }
+    &-right-btn {
+    }
+    .btn {
+      width: 20px;
+    }
+  }
+}
+@media (max-width: 414px) {
+  .container {
+  }
+  .main-pic {
+    max-width: 100%;
+  }
+  .sub-pic {
+    display: none;
   }
 }
 </style>
